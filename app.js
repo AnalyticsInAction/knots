@@ -149,9 +149,6 @@ const KNOTS = [
   when: 'Tying <b>fluorocarbon or mono tippet to a fly or hook</b>. Small, very strong, and seats with a click.',
   rig: [['f', 'Fluoro tippet'], ['h', 'Fly or hook']],
   steps: [
-    { vb: [84, 84, 432], text: 'Clamp your forceps onto the fly for weight. Thread 10–12 cm of tippet through the eye and bring the tag back alongside the main line.',
-      items: [{ s: 'M264,121 C264,126 258,128 250,128 L120,128', k: 'f' }, ...P_EYE],
-      labels: [[14, 102, 'MAIN LINE ← rod', 'f'], [120, 148, 'TAG END', 'f']] },
     { vb: [50, 118, 432], text: 'Take the tag <b>under</b> the main line, then loop it back over your fingertip so it points toward the hook.',
       items: [{ s: P_LEG + 'C119,98 132,104 150,104', k: 'f' }, { finger: [93, 91] }, ...P_EYE],
       labels: [[14, 152, 'MAIN LINE ← rod', 'f'], [158, 100, 'TAG END', 'f'], [93, 95, 'finger', 'note', 'middle']] },

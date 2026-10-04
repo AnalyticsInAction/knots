@@ -1,2 +1,3 @@
-simple figure 8 dropper.png
-16 20 with forecepts.png
+# reference sketches
+*.png
+!icon-*.png
