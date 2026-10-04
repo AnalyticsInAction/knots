@@ -117,7 +117,7 @@ const KNOTS = [
 {
   id: 'fig8', tab: 'Fig-8', sub: 'Dropper',
   name: 'Figure-8 Dropper', aka: 'Figure-of-eight dropper tag knot (Orvis tippet knot family)',
-  use: 'Tippet → tippet, with a dropper',
+  use: 'Dropper',
   when: 'Adding tippet and leaving a <b>dropper tag</b> for Euro-nymphing or any multi-fly rig. Stronger at the tag than a surgeon’s knot.',
   rig: [['l', 'Leader from rod'], ['f', 'New tippet']],
   steps: [
@@ -145,7 +145,7 @@ const KNOTS = [
 {
   id: 'p1620', tab: '16/20', sub: 'Fluoro to hook',
   name: '16/20 Knot', aka: 'Pitzen knot / Eugene bend',
-  use: 'Fluoro → hook',
+  use: 'Fluoro to hook',
   when: 'Tying <b>fluorocarbon or mono tippet to a fly or hook</b>. Small, very strong, and seats with a click.',
   rig: [['f', 'Fluoro tippet'], ['h', 'Fly or hook']],
   steps: [
@@ -174,7 +174,7 @@ const KNOTS = [
 {
   id: 'palomar', tab: 'Palomar', sub: 'Braid to hook',
   name: 'Palomar', aka: 'Doubled-line knot',
-  use: 'Braid → hook or tippet ring',
+  use: 'Braid to hook or tippet ring',
   when: 'Tying <b>braid to a hook, lure, swivel or tippet ring</b>. The doubled line stops slippery braid from pulling through.',
   rig: [['b', 'Braid'], ['h', 'Hook or tippet ring']],
   steps: [
@@ -193,7 +193,7 @@ const KNOTS = [
 {
   id: 'albright', tab: 'Albright', sub: 'Braid to fluoro',
   name: 'Albright', aka: 'Albright special',
-  use: 'Braid → fluoro leader',
+  use: 'Braid to fluoro',
   when: 'Joining <b>braid main line to a fluorocarbon leader</b>. Slim enough to run through the rod guides.',
   rig: [['b', 'Braid'], ['f', 'Fluoro leader']],
   steps: [
@@ -228,14 +228,9 @@ app.innerHTML = KNOTS.map(k => `
 <section class="knot" id="k-${k.id}">
   <div class="head">
     <h1>${k.name}</h1>
-    <p class="aka">${k.aka}</p>
-    <div class="rig" role="img" aria-label="${k.use}">${k.rig.map(([c, t]) => `<span>${t}<i class="sw-${c}"></i></span>`).join('<b></b>')}</div>
-    <p class="when">${k.when}</p>
+    <p class="use">Use: ${k.use}</p>
   </div>
-  ${k.steps.map((s, i) => `<div class="step">${draw(s)}${s.list
-    ? `<ol start="${i + 1}">${s.list.map(t => `<li>${t}</li>`).join('')}</ol>`
-    : `<p><span class="num">${i + 1}</span><span>${s.text}</span></p>`}</div>`).join('')}
-  <div class="tips"><h2>Worth knowing</h2><ul>${k.tips.map(t => `<li>${t}</li>`).join('')}</ul></div>
+  ${k.steps.map(s => `<div class="step">${draw(s)}</div>`).join('')}
 </section>`).join('');
 nav.innerHTML = KNOTS.map(k => `<button data-id="${k.id}"><b>${k.tab}</b><small>${k.sub}</small></button>`).join('');
 
