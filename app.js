@@ -69,9 +69,12 @@ function draw(step) {
     else if (it.raw) o += it.raw;
     else if (it.brace) o += `<path class="brace" d="${it.brace}"/>`;
   }
-  for (const [x, y, t, c, a] of step.labels || [])
-    o += `<text class="lb lb-${c}" x="${x}" y="${y}" text-anchor="${a || 'start'}">${t}</text>`;
-  return `<svg viewBox="0 ${step.vb[0]} ${step.vb[2] || 360} ${step.vb[1]}" role="img">${o}</svg>`;
+  // flip: mirror the drawing left-to-right but keep the labels readable
+  const w = step.vb[2] || 360, f = step.flip, swap = { start: 'end', end: 'start', middle: 'middle' };
+  if (f) o = `<g transform="translate(${w},0) scale(-1,1)">${o}</g>`;
+  for (const [x, y, t, c, a = 'start'] of step.labels || [])
+    o += `<text class="lb lb-${c}" x="${f ? w - x : x}" y="${y}" text-anchor="${f ? swap[a] : a}">${t}</text>`;
+  return `<svg viewBox="0 ${step.vb[0]} ${w} ${step.vb[1]}" role="img">${o}</svg>`;
 }
 
 /* ---------- geometry shared between steps ---------- */
@@ -105,8 +108,7 @@ const PAL = [
 const P_LEG = 'M264,121 C264,126 258,128 250,128 L130,128 C105,128 70,118 70,88 C70,60 116,60 118,86 ';
 const P_FORCEPS = '<path class="cas" stroke-width="12" d="M312,139 L366,139"/><path class="hook" stroke-width="7" d="M312,139 L368,139"/>' +
   '<path class="hook" d="M368,139 L405,130 M368,139 L405,150"/><circle cx="368" cy="139" r="3.5" style="fill:var(--hook)"/>' +
-  '<circle class="hook" cx="415" cy="126" r="11"/><circle class="hook" cx="415" cy="154" r="11"/>' +
-  '<text class="lb lb-note" x="372" y="118" text-anchor="middle">forceps</text>';
+  '<circle class="hook" cx="415" cy="126" r="11"/><circle class="hook" cx="415" cy="154" r="11"/>';
 const P_EYE = [{ ring: [258, 121] }, { shank: [258, 121, -90] }, { raw: P_FORCEPS },{ s: 'M14,114 L250,114 C258,114 264,116 264,121', k: 'f' }];
 
 // Albright: fluoro loop on the right, braid coming in from the left
@@ -149,13 +151,13 @@ const KNOTS = [
   when: 'Tying <b>fluorocarbon or mono tippet to a fly or hook</b>. Small, very strong, and seats with a click.',
   rig: [['f', 'Fluoro tippet'], ['h', 'Fly or hook']],
   steps: [
-    { vb: [26, 146, 432], text: 'Wind the tag <b>4 times</b> around both lines, working toward the hook. Then pass the tag back through the small loop your finger was holding.',
+    { vb: [26, 146, 432], flip: 1, text: 'Wind the tag <b>4 times</b> around both lines, working toward the hook. Then pass the tag back through the small loop your finger was holding.',
       items: [{ s: 'M100,100 L100,40', k: 'f' }, { bars: [136, 105, 138, 4, 20, -4], k: 'f', back: 1 },
               { s: P_LEG + 'C119,98 124,104 132,105', k: 'f' }, ...P_EYE,
               { bars: [136, 105, 138, 4, 20, -4], k: 'f' },
               { s: 'M200,138 C204,162 150,160 124,154 C106,150 100,138 100,100', k: 'f' },
               { arrow: 'M140,92 L204,92' }],
-      labels: [[108, 46, 'TAG END through loop', 'f'], [172, 84, '4 wraps', 'note', 'middle'], [14, 152, 'MAIN ← rod', 'f']] },
+      labels: [[108, 46, 'TAG END through loop', 'f'], [172, 84, '4 wraps', 'note', 'middle'], [14, 152, 'MAIN → rod', 'f'], [372, 118, 'forceps', 'note', 'middle']] },
   ],
   tips: ['<b>Forceps make it easier:</b> clamp them onto the fly. The extra weight keeps the tippet taut so the wraps go on quickly and neatly.',
          'Tighten by pulling the main line — you should feel it pop into place. If it doesn’t click, retie.',
