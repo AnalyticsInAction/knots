@@ -1,5 +1,5 @@
 // Offline cache. Bump the version when index.html or app.js changes so phones pick up the update.
-const CACHE = 'knots-v4';
+const CACHE = 'knots-v5';
 const FILES = ['./', 'index.html', 'app.js', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {

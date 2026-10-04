@@ -37,10 +37,10 @@ html,body{margin:0}
 body{
   background:var(--bg); color:var(--ink);
   font:17px/1.45 var(--body);
-  padding:0 0 calc(104px + env(safe-area-inset-bottom));
+  padding:0 0 calc(24px + env(safe-area-inset-bottom));
   -webkit-text-size-adjust:100%; -webkit-tap-highlight-color:transparent;
 }
-main{max-width:560px;margin:0 auto;padding:22px 14px 8px}
+main{max-width:560px;margin:0 auto;padding:20px 14px 8px}
 section.knot{display:none}
 section.knot.on, body.all section.knot{display:block}
 section.knot.on{animation:in .18s ease-out}
@@ -77,9 +77,9 @@ h1{font:700 48px/.95 var(--cond);letter-spacing:-.01em;margin:0}
 .tips ul{list-style:none;margin:0;padding:0}
 .tips li{padding:11px 0;border-top:1px solid var(--rule)}
 
-nav{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));
-  max-width:540px;margin:0 auto;display:flex;gap:2px;padding:5px;border-radius:26px;
-  background:var(--bar);box-shadow:0 10px 28px rgba(8,22,30,.32);z-index:5}
+nav{position:sticky;top:calc(10px + env(safe-area-inset-top));width:calc(100% - 20px);
+  max-width:540px;margin:10px auto 0;display:flex;gap:2px;padding:5px;border-radius:26px;
+  background:var(--bar);box-shadow:0 6px 20px rgba(8,22,30,.25);z-index:5}
 body.all nav{display:none}
 nav button{flex:1;min-width:0;border:0;border-radius:21px;background:none;color:var(--bar-ink);
   font:inherit;padding:9px 2px 9px;display:flex;flex-direction:column;align-items:center;gap:1px;
@@ -109,8 +109,8 @@ nav button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
   <defs><marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
     <path d="M0,0 L10,5 L0,10 z" style="fill:var(--ink2)"/></marker></defs>
 </svg>
-<main id="app"></main>
 <nav id="nav"></nav>
+<main id="app"></main>
 
 <script src="app.js"></script>
 </body>
