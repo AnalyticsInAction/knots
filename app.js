@@ -164,6 +164,22 @@ const KNOTS = [
          '3 wraps is enough on heavy tippet; use 4–5 on very fine tippet.'],
 },
 {
+  id: 'albright', tab: 'Albright', sub: 'Braid to fluoro',
+  name: 'Albright', aka: 'Albright special',
+  use: 'Braid to fluoro',
+  when: 'Joining <b>braid main line to a fluorocarbon leader</b>. Slim enough to run through the rod guides.',
+  rig: [['b', 'Braid'], ['f', 'Fluoro leader']],
+  steps: [
+    { vb: [70, 108], flip: 1, text: 'Pass the braid tag back through the loop so it comes out the <b>same side it went in</b>, next to the braid main line.',
+      items: [{ bars: A_WRAPS, k: 'b', back: 1 }, { s: 'M162,150 C150,150 142,133 128,133 L50,150', k: 'b' }, { s: 'M14,125 L262,125', k: 'b' }, A_LOOP,
+              { s: 'M262,125 C275,125 275,101 252,100', k: 'b' }, { bars: A_WRAPS, k: 'b' }],
+      labels: [[14, 112, 'BRAID → reel', 'b'], [50, 170, 'BRAID TAG', 'b', 'middle'], [346, 100, 'fly ← FLUORO', 'f', 'end'], [180, 84, '10 wraps', 'note', 'middle']] },
+  ],
+  tips: ['The loop is always made in the <b>thicker, stiffer line</b> (the fluoro); the braid does the wrapping.',
+         'Keep the wraps pinched and side by side — one crossed wrap is where it fails.',
+         'Give it a hard test pull before you fish it.'],
+},
+{
   id: 'palomar', tab: 'Palomar', sub: 'Braid to hook',
   name: 'Palomar', aka: 'Doubled-line knot',
   use: 'Braid to hook or tippet ring',
@@ -181,22 +197,6 @@ const KNOTS = [
   tips: ['On a <b>tippet ring</b> it is the same knot — the loop just passes over the ring.',
          'Make sure the loop seats <b>above</b> the eye, not caught on the shank.',
          'Braid cuts skin under load — snug it down with the line wrapped round forceps or a gloved hand.'],
-},
-{
-  id: 'albright', tab: 'Albright', sub: 'Braid to fluoro',
-  name: 'Albright', aka: 'Albright special',
-  use: 'Braid to fluoro',
-  when: 'Joining <b>braid main line to a fluorocarbon leader</b>. Slim enough to run through the rod guides.',
-  rig: [['b', 'Braid'], ['f', 'Fluoro leader']],
-  steps: [
-    { vb: [70, 108], flip: 1, text: 'Pass the braid tag back through the loop so it comes out the <b>same side it went in</b>, next to the braid main line.',
-      items: [{ bars: A_WRAPS, k: 'b', back: 1 }, { s: 'M162,150 C150,150 142,133 128,133 L50,150', k: 'b' }, { s: 'M14,125 L262,125', k: 'b' }, A_LOOP,
-              { s: 'M262,125 C275,125 275,101 252,100', k: 'b' }, { bars: A_WRAPS, k: 'b' }],
-      labels: [[14, 112, 'BRAID → reel', 'b'], [50, 170, 'BRAID TAG', 'b', 'middle'], [346, 100, 'fly ← FLUORO', 'f', 'end'], [180, 84, '10 wraps', 'note', 'middle']] },
-  ],
-  tips: ['The loop is always made in the <b>thicker, stiffer line</b> (the fluoro); the braid does the wrapping.',
-         'Keep the wraps pinched and side by side — one crossed wrap is where it fails.',
-         'Give it a hard test pull before you fish it.'],
 },
 ];
 
