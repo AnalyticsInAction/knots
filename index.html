@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Knots</title>
+<meta name="theme-color" content="#e7ecee" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b1820" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&family=Barlow+Semi+Condensed:wght@600;700&display=swap">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{
+  --bg:#e7ecee; --panel:#ffffff; --ink:#0f2430; --ink2:#566873; --rule:#d3dce0;
+  --accent:#e22d63;
+  --bar:#0f2430; --bar-ink:#aebdc6; --bar-on:#ffffff; --bar-on-ink:#0f2430;
+  --braid:#1c9a48; --braid-tex:#0c5a27;
+  --fluoro:#1f74e0; --leader:#e8730a; --hook:#47535e;
+  --lb-b:#137a37; --lb-f:#155fc0; --lb-l:#c25c00;
+  --cond:"Barlow Semi Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"Barlow",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0b1820; --panel:#132631; --ink:#eef4f7; --ink2:#9db0bb; --rule:#244150;
+    --accent:#ff5c8a;
+    --bar:#1d3847; --bar-ink:#a9bcc7; --bar-on:#eef4f7; --bar-on-ink:#0b1820;
+    --braid:#43d977; --braid-tex:#0f6b31;
+    --fluoro:#62aeff; --leader:#ff9a3d; --hook:#c2cdd5;
+    --lb-b:#43d977; --lb-f:#62aeff; --lb-l:#ff9a3d;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font:17px/1.45 var(--body);
+  padding:0 0 calc(104px + env(safe-area-inset-bottom));
+  -webkit-text-size-adjust:100%; -webkit-tap-highlight-color:transparent;
+}
+main{max-width:560px;margin:0 auto;padding:22px 14px 8px}
+section.knot{display:none}
+section.knot.on, body.all section.knot{display:block}
+section.knot.on{animation:in .18s ease-out}
+@keyframes in{from{opacity:0;transform:translateY(5px)}}
+@media (prefers-reduced-motion: reduce){section.knot.on{animation:none}}
+body.all section.knot{margin-bottom:48px}
+
+.head{padding:0 6px}
+h1{font:700 48px/.95 var(--cond);letter-spacing:-.01em;margin:0}
+.aka{color:var(--ink2);font-size:15px;margin:6px 0 0}
+.when{margin:14px 0 18px}
+
+/* the rig: what joins to what, drawn as the two lines meeting at the knot */
+.rig{display:flex;align-items:flex-end;margin:18px 0 0}
+.rig span{flex:1;font:600 18px/1.1 var(--cond)}
+.rig span + b + span{text-align:right}
+.rig i{display:block;height:8px;margin-top:7px;border-radius:4px 0 0 4px}
+.rig span + b + span i{border-radius:0 4px 4px 0}
+.rig b{flex:none;width:20px;height:20px;margin:0 -4px -6px;border-radius:50%;
+  background:var(--bg);border:5px solid var(--ink);position:relative}
+.sw-b{background:repeating-linear-gradient(90deg,var(--braid) 0 4px,var(--braid-tex) 4px 6px)}
+.sw-f{background:var(--fluoro)} .sw-l{background:var(--leader)} .sw-h{background:var(--hook)}
+
+.step{background:var(--panel);border-radius:22px;margin:0 0 12px;overflow:hidden}
+.step svg{display:block;width:100%;height:auto}
+.step p{margin:0;padding:4px 18px 18px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start}
+.num{font:700 36px/.9 var(--cond);color:var(--accent);min-width:18px}
+.step ol{margin:0;padding:4px 18px 16px 44px}
+.step li{margin:7px 0;padding-left:4px}
+.step li::marker{font:700 22px/1 var(--cond);color:var(--accent)}
+
+.tips{padding:14px 6px 0}
+.tips h2{font:700 24px/1 var(--cond);margin:0 0 8px}
+.tips ul{list-style:none;margin:0;padding:0}
+.tips li{padding:11px 0;border-top:1px solid var(--rule)}
+
+nav{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));
+  max-width:540px;margin:0 auto;display:flex;gap:2px;padding:5px;border-radius:26px;
+  background:var(--bar);box-shadow:0 10px 28px rgba(8,22,30,.32);z-index:5}
+body.all nav{display:none}
+nav button{flex:1;min-width:0;border:0;border-radius:21px;background:none;color:var(--bar-ink);
+  font:inherit;padding:9px 2px 9px;display:flex;flex-direction:column;align-items:center;gap:1px;
+  transition:background .15s,color .15s}
+nav b{font:700 18px/1.05 var(--cond);color:#fff}
+nav small{font-size:11.5px;line-height:1.2;white-space:nowrap}
+nav button.on{background:var(--bar-on);color:var(--bar-on-ink)}
+nav button.on b{color:var(--bar-on-ink)}
+nav button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* diagram */
+.cas{fill:none;stroke:var(--panel);stroke-linecap:butt;stroke-linejoin:round}
+.ln{fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.ln-b{stroke:var(--braid)} .ln-f{stroke:var(--fluoro)} .ln-l{stroke:var(--leader)}
+.tex{fill:none;stroke:var(--braid-tex);stroke-width:5;stroke-dasharray:1.6 3.6;stroke-linecap:butt}
+.bk{opacity:.4}
+.hook{fill:none;stroke:var(--hook);stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round}
+.lb{font:700 14.5px var(--cond);letter-spacing:.01em;paint-order:stroke;stroke:var(--panel);stroke-width:4px;stroke-linejoin:round}
+.lb-b{fill:var(--lb-b)} .lb-f{fill:var(--lb-f)} .lb-l{fill:var(--lb-l)} .lb-note{fill:var(--ink2);font-weight:600}
+.arr{fill:none;stroke:var(--ink2);stroke-width:2;stroke-dasharray:5 4;stroke-linecap:round}
+.brace{fill:none;stroke:var(--ink2);stroke-width:1.5}
+.finger{fill:#f1c7a3;stroke:#c4946c;stroke-width:1.5}
+</style>
+</head>
+<body>
+<svg id="measure" width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs><marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" style="fill:var(--ink2)"/></marker></defs>
+</svg>
+<main id="app"></main>
+<nav id="nav"></nav>
+
+<script src="app.js"></script>
+</body>
+</html>
