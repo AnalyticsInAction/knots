@@ -1,5 +1,5 @@
 // Offline support. Online: always fetch the latest files. Offline or slow signal: use the saved copy.
-const CACHE = 'knots-v13';
+const CACHE = 'knots-v14';
 const FILES = ['./', 'index.html', 'app.js', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 const TIMEOUT = 3000;
 

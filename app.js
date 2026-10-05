@@ -201,6 +201,7 @@ const KNOTS = [
 ];
 
 /* ---------- page ---------- */
+const FS_ICON = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3,8 V3 H8 M12,3 H17 V8 M17,12 V17 H12 M8,17 H3 V12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const app = document.getElementById('app'), nav = document.getElementById('nav');
 app.innerHTML = KNOTS.map(k => `
 <section class="knot" id="k-${k.id}">
@@ -208,7 +209,7 @@ app.innerHTML = KNOTS.map(k => `
     <h1>${k.name}</h1>
     <p class="use">Use: ${k.use}</p>
   </div>
-  ${k.steps.map(s => `<div class="step">${draw(s)}</div>`).join('')}
+  ${k.steps.map(s => `<div class="step">${draw(s)}<button class="fs-btn" type="button">${FS_ICON}<span class="o">Full screen</span><span class="x">Close</span></button></div>`).join('')}
 </section>`).join('');
 nav.innerHTML = KNOTS.map(k => `<button data-id="${k.id}"><b>${k.tab}</b><small>${k.sub}</small></button>`).join('');
 
@@ -226,6 +227,21 @@ nav.addEventListener('click', e => {
 let start = location.hash.slice(1);
 if (!start) { try { start = localStorage.getItem('knot'); } catch (e) {} }
 show(start);
+
+// Full screen: show one diagram on its own, turned to landscape where the phone allows it
+app.addEventListener('click', async e => {
+  const b = e.target.closest('.fs-btn'); if (!b) return;
+  const el = b.parentElement;
+  if (document.fullscreenElement) { document.exitFullscreen(); return; }
+  if (el.classList.contains('fs')) { el.classList.remove('fs'); return; }
+  try {
+    await el.requestFullscreen();
+    try { await screen.orientation.lock('landscape'); } catch (e) {}
+  } catch (e) { el.classList.add('fs'); }   // no Fullscreen API: fill the window instead
+});
+document.addEventListener('fullscreenchange', () => {
+  if (!document.fullscreenElement) { try { screen.orientation.unlock(); } catch (e) {} }
+});
 
 // Keep the screen on while tying (ignored where unsupported)
 async function wake() { try { await navigator.wakeLock.request('screen'); } catch (e) {} }
